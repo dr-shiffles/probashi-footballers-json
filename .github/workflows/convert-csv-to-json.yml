@@ -6,7 +6,11 @@ on:
       - 'data/*.csv'
     branches:
       - main
-  workflow_dispatch:  # Allow manual trigger
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: write  # This gives the action permission to push
 
 jobs:
   convert:
@@ -15,25 +19,30 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-      
+      with:
+        persist-credentials: true  # Important for pushing back
+        fetch-depth: 0
+    
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '24'
-        
+        node-version: '20'
+    
     - name: Install dependencies
       run: npm install csvtojson
-      
+    
     - name: Create JSON directory
       run: mkdir -p json
-      
+    
     - name: Convert CSV to JSON
       run: node .github/scripts/convert-csv-to-json.js
-      
+    
     - name: Commit and push JSON files
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
         git add json/
         git diff --quiet && git diff --staged --quiet || git commit -m "Auto-convert CSV to JSON [skip ci]"
         git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
