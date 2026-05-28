@@ -85,6 +85,7 @@ async function loadJSONData(jsonFilename = 'mens.json') {
         
     } catch (error) {
         console.error('Error loading JSON:', error);
+        console.error('Attempted to load:', `/json/${jsonFilename}`)
         alert('Data file not found. Please ensure the website is properly deployed.');
         playersData = [];
         filteredData = [];
