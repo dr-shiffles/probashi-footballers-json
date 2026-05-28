@@ -160,12 +160,12 @@
 
     <script src="scripts/script.js"></script>
     <script>
-        // Load women's data
+        // Load women's data from JSON
         document.addEventListener('DOMContentLoaded', async () => {
-            await loadCSVData('data/women.csv');
+            await loadJSONData('womens.json');  // Changed from loadCSVData
             setupEventListeners();
             
-            // Mobile menu toggle
+            // Mobile menu toggle (keep existing code)
             const hamburger = document.querySelector('.hamburger');
             const navMenu = document.querySelector('.nav-menu');
             
@@ -174,7 +174,6 @@
                     navMenu.classList.toggle('active');
                 });
                 
-                // Close menu when clicking a link
                 document.querySelectorAll('.nav-link').forEach(link => {
                     link.addEventListener('click', () => {
                         navMenu.classList.remove('active');
