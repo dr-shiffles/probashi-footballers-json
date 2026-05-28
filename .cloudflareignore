@@ -1,0 +1,31 @@
+# .cloudflareignore - Files to exclude from Cloudflare Pages deployment
+
+# Node.js
+node_modules/
+package.json
+package-lock.json
+bun.lockb
+.github/
+.git/
+.gitignore
+
+# Development files
+*.log
+*.tmp
+.DS_Store
+.env*
+
+# Build tools
+.github/
+scripts/convert-csv-to-json.js
+convert-to-json.js
+
+# CSV files (keep JSON instead)
+data/*.csv
+!data/.keep
+
+# Large files
+*.psd
+*.ai
+*.zip
+*.tar.gz
