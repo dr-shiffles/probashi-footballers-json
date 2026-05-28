@@ -1,0 +1,14 @@
+# _headers - Cloudflare Pages headers configuration
+/json/*
+  Content-Type: application/json
+  Cache-Control: public, max-age=3600
+
+/style/*
+  Content-Type: text/css
+  Cache-Control: public, max-age=86400
+
+/scripts/*
+  Cache-Control: public, max-age=86400
+
+*.html
+  Cache-Control: public, max-age=300
